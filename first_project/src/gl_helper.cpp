@@ -72,7 +72,7 @@ bool GLHelper::init()
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    _io = ImGui::GetIO(); 
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();

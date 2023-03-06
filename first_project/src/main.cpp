@@ -4,6 +4,7 @@
 // Read online: https://github.com/ocornut/imgui/tree/master/docs
 
 #include "gl_helper.h"
+#include "snake.h"
 
 #include <mathfu/rect.h>
 #include <mathfu/vector.h>
@@ -18,22 +19,21 @@ int main(int, char**)
         std::cout << "gl init error\n";
         return 1;
     }
-
-    Vect screen_pos{30, 30};
-    ImVec2 x{30, 30};
-    float screen_radius{30};
-    ImColor col {0, 255, 255};
-    ImVec2 y{100, 100};
-
+    
+    Game * game = new Snake();
     // Main loop
+    double last_time = glfwGetTime();
     while (!gl_helper.is_window_should_close())
     {
         gl_helper.cycle();
-        x.x += 1;
-        y.x += 1;
+
+        double cur_time = glfwGetTime();
+        float elapsed_time = static_cast<float>(std::min(cur_time - last_time, 1.0));
+        last_time = cur_time;
+        game->update(gl_helper.get_io(), elapsed_time);
+
         ImDrawList* bg_drawlist = ImGui::GetBackgroundDrawList();
-        bg_drawlist->AddCircleFilled(x, screen_radius, col);
-        bg_drawlist->AddText(y, col, "Level:");
+        game->draw(gl_helper.get_io(), *bg_drawlist);
 
         // Rendering
         gl_helper.render();   

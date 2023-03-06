@@ -21,8 +21,10 @@ public:
     bool is_window_should_close();
     void render();
     void cycle();
+    ImGuiIO& get_io() { return _io;}  
 private:
     GLFWwindow* _window;
     int _display_w, _display_h;
     ImVec4 _clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    ImGuiIO _io;
 };
