@@ -5,6 +5,8 @@
 #include <imgui.h>
 #include <vector>
 
+const Vect DEFAULT_WORLD_SIZE{ 800.0f, 600.0f };
+
 const std::vector<ImColor> COLORS
 {
 	{0, 255, 255}, // Aqua

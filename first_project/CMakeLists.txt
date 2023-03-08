@@ -47,10 +47,14 @@ target_include_directories(imgui PUBLIC
 #target_compile_definitions(imgui PUBLIC IM_VEC2_CLASS_EXTRA)
 target_link_libraries(imgui glad glfw)
 
-# arkanoid
+# game
 file(GLOB srcs
    "src/*.h"
    "src/*.cpp"
+   "src/**/*.h"
+   "src/**/*.cpp"
+   "src/**/**/*.h"
+   "src/**/**/*.cpp"
 )
 
 find_package(OpenGL REQUIRED)

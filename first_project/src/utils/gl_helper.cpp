@@ -16,6 +16,7 @@ GLHelper::GLHelper()
 {
      // Setup window
     glfwSetErrorCallback(glfw_error_callback);
+    
 }
 
 GLHelper::~GLHelper()
@@ -72,7 +73,6 @@ bool GLHelper::init()
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    _io = ImGui::GetIO(); 
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();

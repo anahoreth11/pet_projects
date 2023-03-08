@@ -3,8 +3,10 @@
 // If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
 // Read online: https://github.com/ocornut/imgui/tree/master/docs
 
-#include "gl_helper.h"
-#include "snake.h"
+#include "utils/gl_helper.h"
+
+#include "games/dvd_balls.h"
+#include "games/snake.h"
 
 #include <mathfu/rect.h>
 #include <mathfu/vector.h>
@@ -20,7 +22,8 @@ int main(int, char**)
         return 1;
     }
     
-    Game * game = new Snake();
+    Game * game = new DVDBalls();
+    game->reset();
     // Main loop
     double last_time = glfwGetTime();
     while (!gl_helper.is_window_should_close())
@@ -30,10 +33,10 @@ int main(int, char**)
         double cur_time = glfwGetTime();
         float elapsed_time = static_cast<float>(std::min(cur_time - last_time, 1.0));
         last_time = cur_time;
-        game->update(gl_helper.get_io(), elapsed_time);
+        game->update(ImGui::GetIO(), elapsed_time);
 
         ImDrawList* bg_drawlist = ImGui::GetBackgroundDrawList();
-        game->draw(gl_helper.get_io(), *bg_drawlist);
+        game->draw(ImGui::GetIO(), *bg_drawlist);
 
         // Rendering
         gl_helper.render();   
