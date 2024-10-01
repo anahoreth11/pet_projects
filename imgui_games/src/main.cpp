@@ -5,12 +5,14 @@
 
 #include "utils/gl_helper.h"
 
+#include "games/game_settings.h"
 #include "games/dvd_balls.h"
 #include "games/snake.h"
 
 #include <mathfu/rect.h>
 #include <mathfu/vector.h>
 #include <iostream>
+
 
 int main(int, char**)
 {
@@ -22,13 +24,26 @@ int main(int, char**)
         return 1;
     }
     
-    Game * game = new DVDBalls();
+    Game * game = new DVDBalls(2);
+    GameSettings game_settings;
     game->reset();
     // Main loop
     double last_time = glfwGetTime();
     while (!gl_helper.is_window_should_close())
     {
         gl_helper.cycle();
+        
+        // update settings window
+        {
+            ImGui::Begin(game->get_name().c_str());
+
+            ImGui::InputFloat2("World size", game_settings.world_size.data_);
+
+            if (ImGui::Button("Reset"))
+                game->reset(game_settings);
+
+            ImGui::End();
+        }
 
         double cur_time = glfwGetTime();
         float elapsed_time = static_cast<float>(std::min(cur_time - last_time, 1.0));

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.19)
 
-project("first_project") 
+project("imgui_games") 
 
 set(imgui_name "imgui-1.82")
 set(imgui_zip_path "${CMAKE_SOURCE_DIR}/bin/${imgui_name}.zip")
